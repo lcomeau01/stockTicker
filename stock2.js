@@ -23,4 +23,4 @@ http.createServer(function (req, res) {
     else if(path == "/Processing")
         res.write("Processing..."); 
     res.end(); 
-}).listen(8080); 
+}).listen(port); 
