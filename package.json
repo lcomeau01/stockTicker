@@ -2,7 +2,7 @@
   "name": "stock2",
   "version": "1.0.0",
   "description": "node app ",
-  "main": "hello_app.js",
+  "main": "stock2.js",
   "scripts": {
   "start": "node stock2.js"
 },
