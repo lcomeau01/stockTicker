@@ -19,7 +19,7 @@ const connStr = "mongodb+srv://lilycomeau:DOMINOSdc5is@cluster1.4gz6pjg.mongodb.
 client =  new MongoClient(connStr); 
 
 // server set up and everything to happen on the page 
-http.createServer(function (req, res) { 
+http.createServer(async (req, res) => { 
     res.writeHead(200, {'Content-Type': 'text/html'}); 
 
     var path = url.parse(req.url).pathname; 
@@ -30,11 +30,9 @@ http.createServer(function (req, res) {
     else if (path == "/Home") 
         res.write(html_form); 
     else if(path == "/Processing") { 
-        res.write("<p> Processing...</p> <br>"); 
-        findStock(query, res); 
+        res.write("Processing..."); 
+        await findStock(query, res); 
     }
-    else 
-        res.write("Page Not Found..."); 
     res.end(); 
 }).listen(port); 
 
@@ -57,7 +55,7 @@ async function findStock(query, res) {
 
         const searchResult = colCompanies.find(theQuery); 
         if((await searchResult.count()) == 0) { 
-            console.log("No documents found."); 
+            res.write("<p> No documents found. </p>"); 
         }
         else { 
             await searchResult.forEach(function(item) { 
