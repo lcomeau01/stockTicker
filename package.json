@@ -16,8 +16,6 @@
   "url": ""
 },
   "homepage": ""
-}, 
-{
   "dependencies": {
     "mongodb": "^4.0.0"
   }
