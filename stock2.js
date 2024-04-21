@@ -30,14 +30,14 @@ http.createServer(function (req, res) {
     else if (path == "/Home") 
         res.write(html_form); 
     else if(path == "/Processing") { 
-        res.write("Processing..."); 
-        findStock(query); 
+        res.write("Processing...\n"); 
+        findStock(query, res); 
     }
     res.end(); 
 }).listen(port); 
 
 // helper functions   
-async function findStock(query) { 
+async function findStock(query, res) { 
     // choose the correct type of data search 
     value = query['input']; 
     if(query['choice'] == 'name') { 
@@ -59,10 +59,10 @@ async function findStock(query) {
         }
         else { 
             await searchResult.forEach(function(item) { 
-                console.log(item.Name); 
-                console.log(item.Stock_Ticker);
-                console.log(item.Price);  
-                console.log("\n"); 
+                res.write(item.Name); 
+                res.write(item.Stock_Ticker);
+                res.write(item.Price);  
+                res.write("\n"); 
             }); 
         }
     }
