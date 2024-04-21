@@ -30,9 +30,11 @@ http.createServer(function (req, res) {
     else if (path == "/Home") 
         res.write(html_form); 
     else if(path == "/Processing") { 
-        res.write("Processing...\n"); 
+        res.write("<p> Processing...</p> <br>"); 
         findStock(query, res); 
     }
+    else 
+        res.write("Page Not Found..."); 
     res.end(); 
 }).listen(port); 
 
@@ -59,10 +61,10 @@ async function findStock(query, res) {
         }
         else { 
             await searchResult.forEach(function(item) { 
-                res.write(item.Name); 
-                res.write(item.Stock_Ticker);
-                res.write(item.Price);  
-                res.write("\n"); 
+                res.write("<p>" + item.Name + "</p>"); 
+                res.write("<p>" + item.Stock_Ticker + "</p>"); 
+                res.write("<p>" + item.Price + "</p>"); 
+                res.write("<br>"); 
             }); 
         }
     }
